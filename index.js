@@ -1,5 +1,6 @@
 (async () => {
-    const csvPath = './data';
+    const csvPath = './data',
+        spreadsheets = require('./spreadsheets');
 
     try {
 
@@ -12,7 +13,9 @@
         const jsonDataSanitized = jsonData.map(sanitizeJson);
         // console.log(jsonDataSanitized);
 
-        console.dir(joinDateAndData(filesFiltered, jsonDataSanitized));
+        const jsonDataJoinedWithDate = joinDateAndData(filesFiltered, jsonDataSanitized);
+
+        await spreadsheets.test(jsonDataJoinedWithDate);
     } catch (e) {
         console.error(e);
     }
